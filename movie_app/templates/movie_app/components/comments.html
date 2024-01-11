@@ -1,0 +1,21 @@
+{% load thumbnail %}
+{%if movie_comments%}
+<div class="col-sm-12 mt-1">
+    <div class="row">
+    {%for comment in movie_comments%}
+    <div class="col-sm-12 mt-3 p-5 border  rounded-4">
+        <div class="col-sm-12">
+            <a href="{{comment.user.profile.get_absolute_url}}" class="link-dark">
+                <img src="{{comment.user.profile.avatar|thumbnail_url:'micro-avatar'}}" class="img-thumbnail rounded-circle" alt=""> <b class="ms-1">{{comment.user.username}}:</b>
+            </a>
+        </div>
+        <div class="col-sm-12 my-3">
+            <p>
+                {{comment.comment}}
+            </p>
+        </div>
+    </div>
+        {%endfor%}
+    </div>
+</div>
+{%endif%}

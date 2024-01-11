@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block metatitle%}MovieApp{%endblock%}
+
+{%block content%}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-lg-9 border rounded-4 mt-5 p-3">
+            <div class="row">
+                {%include 'movie_app/components/messages.html'%}
+                {% include 'movie_app/components/movie-listing.html' with page_title="<h2 class='mt-5 ms-2'>Most Popular Movies</h2>" movies=popular_movies%}
+            </div>
+            <hr class="mt-5">
+            <div class="row">
+                {% include 'movie_app/components/movie-listing.html' with page_title="<h2 class='mt-5 ms-2'>Latest Movies</h2>" movies=last_movies%}
+            </div>
+            {# Pagination #}
+            {% include 'movie_app/components/pagination.html' with pagination_object=last_movies %}
+            {# Pagination ENDS #}
+        </div>
+        <div class="d-none d-lg-block col-lg-2 ms-1 border rounded-4 mt-5">
+            {% include 'movie_app/components/sidebar.html'%}
+        </div>
+    </div>
+</div>
+{%endblock content%}

@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+{% load thumbnail %}
+
+{%block metatitle%}{{profile.user.username}} Profile Page{%endblock%}
+
+{%block content%}
+<div class="container">
+    <div class="row">
+        <div class="{%if request.user == profile.user%} col-md-9 {%else%} col-sm-12 {%endif%} text-center mt-5">
+            <div class="col-sm-12">
+                {% include 'movie_app/components/messages.html'%}
+                <h1>
+                    {{profile.user.username}} Profile
+                </h1>
+            </div>
+            <div class="col-sm-12 mt-3">
+                <img src="{{profile.avatar|thumbnail_url:'avatar'}}" alt="{{profile.user.username}} avatar" class="img-thumbnail rounded-circle">
+            </div>
+            <div class="col-sm-12 mt-3 border rounded-4 p-5">
+                {{profile.info}}
+                <div class="col-sm-12 mt-3">
+                    {%if profile.twitter%}
+                    <a href="https://twitter.com/{{profile.twitter}}/" class="link-dark" target="_blank"><iconify-icon icon="mdi:twitter" width="20" height="20"></iconify-icon></a>
+                    {%endif%}
+                    {%if profile.instagram%}
+                    <a href="https://instagram.com/{{profile.instagram}}/" class="link-dark" target="_blank"><iconify-icon icon="mdi:instagram" width="20" height="20"></iconify-icon></a>
+                    {%endif%}
+                </div>
+            </div>
+            <h2 class="my-5">All of {{profile.user.username}}'s Comments</h2>
+            {% include 'movie_app/components/profile-comments.html' with movie_comments=user_comments%}
+            {%include 'movie_app/components/pagination.html' with pagination_object=user_comments%}
+        </div>
+        {% if request.user == profile.user %}
+        {% include 'movie_app/components/account-settings.html'%}
+        {%endif%}
+    </div>
+</div>
+{%endblock%}

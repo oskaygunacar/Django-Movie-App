@@ -1,0 +1,12 @@
+{%extends 'base.html'%}
+
+{%block metatitle%}{{page_title}} Movies{%endblock%}
+
+{%block content%}
+{% with page_title="<h1 class='mt-5'>"|add:category.title|add:" Movies</h1>" %}
+{%include 'movie_app/components/movie-listing.html' with movies=category_movies page_title=page_title%}
+{%endwith%}
+{# Pagination #}
+{%include 'movie_app/components/pagination.html' with pagination_object=category_movies%}
+{# Pagination END #}
+{%endblock content%}

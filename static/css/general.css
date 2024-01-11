@@ -1,0 +1,15 @@
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.popular-movie{
+    height: 250px !important;
+}

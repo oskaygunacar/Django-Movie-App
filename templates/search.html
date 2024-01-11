@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="mt-5">
+                You have searched for "{{search_term}}"
+            </h1>
+        </div>
+        <div class="col-sm-12 mt-3">
+            <ul class="list-group">
+                {% for movie in search_movies %}
+                <li class="list-group-item">
+                    <a class="link-dark" href="{{movie.get_absolute_url}}">
+                        {{movie.title}}
+                    </a>
+                </li>
+                {%endfor%}
+              </ul>
+        </div>
+        {%include 'components/search-pagination.html' with pagination_object=search_movies %}
+    </div>
+</div>
+
+{%endblock%}

@@ -1,0 +1,42 @@
+{%extends 'base.html'%}
+
+{%block metatitle%}{{movie.title}}{%endblock%}
+
+{%block content%}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-lg-9 border rounded-4 mt-5 p-3">
+            <div class="col-sm 12">
+                <h1 class="mt-5">{{movie.title}}</h1>
+            </div>
+            <div class="col-sm-12">
+                <iframe src="{{movie.video}}" width="100%" height="450"></iframe>
+            </div>
+            <div class="col-sm-12 text-center mt-3">
+                {%for genre in movie.genre.all%}
+                <a href="{{genre.get_absolute_url}}"><span class="badge rounded-pill text-bg-dark">{{genre.title}}</span></a>
+                {%endfor%}
+                | Release Date: <iconify-icon icon="zondicons:hour-glass"></iconify-icon> {{movie.release_date}}
+            </div>
+            <div class="col-sm-12 border mt-5 p-5 rounded-4">
+                <h2>Movie Info:</h2>
+                <hr>
+                <b>{{movie.overview}}</b>
+            </div>
+            <div class="col-sm-12 mt-5">
+                <div class="col-sm-12 mt-5">
+                    {%include 'movie_app/components/messages.html'%}
+                    {%if request.user.is_authenticated%}
+                    {% include 'movie_app/components/form.html' with form=form %}
+                    {%endif%}
+                </div>
+                <h2 class="h4 mt-5">Comments:</h2>
+                {% include 'movie_app/components/comments.html' %}
+            </div>
+        </div>
+        <div class="d-none d-lg-block col-lg-2 ms-1 border rounded-4 mt-5">
+            {%include 'movie_app/components/sidebar.html'%}
+        </div>
+    </div>
+</div>
+{%endblock content%}

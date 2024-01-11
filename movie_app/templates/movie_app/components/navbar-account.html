@@ -1,0 +1,29 @@
+{%load thumbnail%}
+
+<ul class="navbar-nav ms-auto">
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        {%if request.user.is_authenticated%} <img src="{{request.user.profile.avatar|thumbnail_url:'micro-avatar'}}" class="img-thumbnail rounded-circle" alt="{{request.user.get_full_name}} Avatar"> <span class="ms-1">{{request.user.username}}</span>
+        {%else%}
+        Become a member
+        {%endif%}
+      </a>
+      <ul class="dropdown-menu">
+        {%if request.user.is_authenticated%}
+        <li class="nav-item">
+          <a href="{{request.user.profile.get_absolute_url}}" class="nav-link ms-2"> Account</a>
+        </li>
+        <li class="nav-item">
+          <a href="{%url 'movie_app:logout'%}" class="nav-link ms-2"> Logout</a>
+        </li>
+        {%else%}
+        <li class="nav-item">
+          <a href="{%url 'movie_app:login'%}" class="nav-link ms-2"> Login</a>
+        </li>
+        <li class="nav-item">
+          <a href="{%url 'movie_app:signup'%}" class="nav-link ms-2"> Signup</a>
+        </li>
+        {%endif%}
+      </ul>
+    </li>
+  </ul>

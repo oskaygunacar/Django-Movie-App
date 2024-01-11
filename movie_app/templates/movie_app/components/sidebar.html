@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row text-center">
+        <div class="col-sm-12 mt-5">
+            <h5>
+                <iconify-icon icon="mingcute:movie-fill"></iconify-icon> Categories
+            </h5>
+        </div>
+        <div class="col-sm-12">
+            <ul class="list-unstyled">
+                {%for category in categories %}
+                <li><a href="{{category.get_absolute_url}}" style="color: #1B1464;">{{category.title}}</a></li>
+                {%endfor%}
+            </ul>
+        </div>
+        <div class="col-sm-12">
+            <h5><iconify-icon icon="mingcute:movie-fill"></iconify-icon> Latest Movies</h5>
+            <ul class="list-unstyled">
+            {%for movie in latest_movies_processor%} {# latest_movies_processor comes from context_processor.py #}
+                <li class="mt-2"><a href="{{movie.get_absolute_url}}" style="color:#EA2027"> <iconify-icon icon="icon-park:right"></iconify-icon> {{movie.title}}</a></li>
+            {%endfor%}
+            </ul>
+        </div>
+        <div class="col-sm-12 mt-5">
+            <h5>Latest Comments</h5>
+            <ul class="list-unstyled">
+                {%for comment in latest_comments %} {# latest_comments comes from context_processor.py #}
+                    <li class="mt-2"><a href="{{comment.movie.get_absolute_url}}"> <iconify-icon icon="mingcute:comment-fill"></iconify-icon> {{comment.comment}}</a></li>
+                {%endfor%}
+            </ul>
+        </div>
+    </div>
+</div>

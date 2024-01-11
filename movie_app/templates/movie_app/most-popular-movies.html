@@ -1,0 +1,8 @@
+{%extends 'base.html'%}
+
+{%block metatitle%}{{page_title}}{%endblock%}
+
+{%block content%}
+{%include 'movie_app/components/movie-listing.html' with page_title="<h1 class='mt-5'>Most Popular Movies</h1>" movies=popular_movies %}
+{%include 'movie_app/components/pagination.html' with pagination_object=popular_movies%}
+{%endblock content%}
